@@ -1,0 +1,40 @@
+{
+    "name": "jmf/twig-extensions-bundle",
+    "description" : "Collection of Twig extensions as a Symfony Bundle",
+    "license": "mit",
+    "type": "symfony-bundle",
+    "require": {
+        "php": "^8.0",
+        "jmf/twig-array": "^1.0",
+        "jmf/twig-currency": "^1.0",
+        "jmf/twig-inline": "^1.0",
+        "jmf/twig-sort": "^1.0",
+        "jmf/twig-time": "^1.0",
+        "jmf/twig-type": "^1.0",
+        "symfony/framework-bundle": "^7.0"
+    },
+    "require-dev": {
+        "phpmd/phpmd": "^2.13",
+        "phpstan/phpstan": "^2.1",
+        "phpunit/phpunit": "^12.0",
+        "rector/rector": "^2.0",
+        "squizlabs/php_codesniffer": "^3.8"
+    },
+    "config": {
+        "audit": {
+            "abandoned": "report"
+        },
+        "optimize-autoloader": true,
+        "sort-packages": true
+    },
+    "autoload": {
+        "psr-4": {
+            "Jmf\\TwigExtensionsBundle\\": "src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Jmf\\TwigExtensionsBundle\\": "tests/unit/src"
+        }
+    }
+}

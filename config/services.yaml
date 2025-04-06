@@ -1,0 +1,49 @@
+parameters:
+
+    jmf_twig_extensions.array.prefix:     ''
+    jmf_twig_extensions.currency.prefix:  ''
+    jmf_twig_extensions.inline.base_path: '%kernel.project_dir%/templates'
+    jmf_twig_extensions.inline.prefix:    ''
+    jmf_twig_extensions.sort.prefix:      ''
+    jmf_twig_extensions.time.locale:      ~
+    jmf_twig_extensions.time.prefix:      ''
+    jmf_twig_extensions.type.prefix:      ''
+
+services:
+
+    _defaults:
+        autoconfigure: true
+        autowire:      true
+
+    Jmf\Sort\AssociativeSorter:
+    Jmf\Sort\ByKeySorter:
+    Jmf\Sort\ByPropertySorter:
+    Jmf\Sort\ByValueSorter:
+
+    Jmf\Twig\Extension\Array\ArrayExtension:
+        arguments:
+            $functionPrefix: '%jmf_twig_extensions.array.prefix%'
+
+    Jmf\Twig\Extension\Currency\CurrencyExtension:
+        arguments:
+            $functionPrefix: '%jmf_twig_extensions.currency.prefix%'
+
+    Jmf\Twig\Extension\Inline\InlineExtension:
+        arguments:
+            $functionPrefix: '%jmf_twig_extensions.inline.prefix%'
+            $basePath:       '%jmf_twig_extensions.inline.base_path%'
+
+    Jmf\Twig\Extension\Sort\PropertyPassParser:
+
+    Jmf\Twig\Extension\Sort\SortExtension:
+        arguments:
+            $functionPrefix: '%jmf_twig_extensions.sort.prefix%'
+
+    Jmf\Twig\Extension\Time\TimeExtension:
+        arguments:
+            $functionPrefix: '%jmf_twig_extensions.time.prefix%'
+            $locale:         '%jmf_twig_extensions.time.locale%'
+
+    Jmf\Twig\Extension\Type\TypeExtension:
+        arguments:
+            $functionPrefix: '%jmf_twig_extensions.type.prefix%'
