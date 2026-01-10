@@ -11,14 +11,15 @@
         "jmf/twig-sort": "^1.0",
         "jmf/twig-time": "^1.0",
         "jmf/twig-type": "^1.0",
-        "symfony/framework-bundle": "^7.0"
+        "symfony/framework-bundle": "^7.0|^8.0"
     },
     "require-dev": {
-        "phpmd/phpmd": "^2.13",
+        "overtrue/phplint": "^9.7",
         "phpstan/phpstan": "^2.1",
+        "phpstan/phpstan-strict-rules": "^2.0",
         "phpunit/phpunit": "^12.0",
         "rector/rector": "^2.0",
-        "squizlabs/php_codesniffer": "^3.8"
+        "squizlabs/php_codesniffer": "^4.0"
     },
     "config": {
         "audit": {
@@ -34,7 +35,7 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "Jmf\\TwigExtensionsBundle\\": "tests/unit/src"
+            "Jmf\\TwigExtensionsBundle\\": "tests/src"
         }
     }
 }

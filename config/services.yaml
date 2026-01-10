@@ -1,14 +1,3 @@
-parameters:
-
-    jmf_twig_extensions.array.prefix:     ''
-    jmf_twig_extensions.currency.prefix:  ''
-    jmf_twig_extensions.inline.base_path: '%kernel.project_dir%/templates'
-    jmf_twig_extensions.inline.prefix:    ''
-    jmf_twig_extensions.sort.prefix:      ''
-    jmf_twig_extensions.time.locale:      ~
-    jmf_twig_extensions.time.prefix:      ''
-    jmf_twig_extensions.type.prefix:      ''
-
 services:
 
     _defaults:
