@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Jmf\TwigExtensionsBundle;
 
 use Jmf\Twig\Extension\Array\ArrayExtension;
@@ -24,38 +26,65 @@ class JmfTwigExtensionsBundle extends AbstractBundle
         $definition->import('../config/definition.php');
     }
 
+    /**
+     * @param array{
+     *     enabled: bool,
+     *     prefix: string,
+     *     extensions: array{
+     *         array:    array{enabled: bool|null, prefix: string|null},
+     *         currency: array{enabled: bool|null, prefix: string|null},
+     *         inline:   array{basePath: string, enabled: bool|null, prefix: string|null},
+     *         sort:     array{enabled: bool|null, prefix: string|null},
+     *         time:     array{enabled: bool|null, locale: string|null, prefix: string|null},
+     *         type:     array{enabled: bool|null, prefix: string|null},
+     *     },
+     * } $config
+     */
     #[Override]
     public function loadExtension(
         array $config,
-        ContainerConfigurator $container,
-        ContainerBuilder $builder,
+        ContainerConfigurator $configurator,
+        ContainerBuilder $container,
     ): void {
-        $container->import('../config/services.yaml');
+        $configurator->import('../config/services.yaml');
 
-        $this->loadParameters($config, $container);
-        $this->disableServices($config, $container);
+        $this->loadParameters($config, $configurator);
+        $this->disableServices($config, $configurator);
     }
 
     /**
-     * @param array<string, mixed> $config
+     * @param array{
+     *     enabled: bool,
+     *     prefix: string,
+     *     extensions: array{
+     *         array:    array{enabled: bool|null, prefix: string|null},
+     *         currency: array{enabled: bool|null, prefix: string|null},
+     *         inline:   array{basePath: string, enabled: bool|null, prefix: string|null},
+     *         sort:     array{enabled: bool|null, prefix: string|null},
+     *         time:     array{enabled: bool|null, locale: string|null, prefix: string|null},
+     *         type:     array{enabled: bool|null, prefix: string|null},
+     *     },
+     * } $config
      */
     private function loadParameters(
         array $config,
-        ContainerConfigurator $container,
+        ContainerConfigurator $containerConfigurator,
     ): void {
+        $rootPrefix = $config['prefix'];
+
         $map = [
-            'array.prefix'     => $config['array']['prefix'],
-            'currency.prefix'  => $config['currency']['prefix'],
-            'inline.base_path' => $config['inline']['basePath'],
-            'inline.prefix'    => $config['inline']['prefix'],
-            'sort.prefix'      => $config['sort']['prefix'],
-            'time.locale'      => $config['time']['locale'],
-            'time.prefix'      => $config['time']['prefix'],
-            'type.prefix'      => $config['type']['prefix'],
+            'array.prefix'     => $config['extensions']['array']['prefix'] ?? $rootPrefix,
+            'currency.prefix'  => $config['extensions']['currency']['prefix'] ?? $rootPrefix,
+            'inline.base_path' => $config['extensions']['inline']['basePath'],
+            'inline.prefix'    => $config['extensions']['inline']['prefix'] ?? $rootPrefix,
+            'sort.prefix'      => $config['extensions']['sort']['prefix'] ?? $rootPrefix,
+            'time.locale'      => $config['extensions']['time']['locale'],
+            'time.prefix'      => $config['extensions']['time']['prefix'] ?? $rootPrefix,
+            'type.prefix'      => $config['extensions']['type']['prefix'] ?? $rootPrefix,
         ];
 
         foreach ($map as $parameter => $value) {
-            $container->parameters()->set(
+            $containerConfigurator->parameters()->set(
                 "{$this->extensionAlias}.{$parameter}",
                 $value,
             );
@@ -63,11 +92,22 @@ class JmfTwigExtensionsBundle extends AbstractBundle
     }
 
     /**
-     * @param array<string, mixed> $config
+     * @param array{
+     *     enabled: bool,
+     *     prefix: string,
+     *     extensions: array{
+     *         array:    array{enabled: bool|null, prefix: string|null},
+     *         currency: array{enabled: bool|null, prefix: string|null},
+     *         inline:   array{enabled: bool|null, prefix: string|null, basePath: string},
+     *         sort:     array{enabled: bool|null, prefix: string|null},
+     *         time:     array{enabled: bool|null, locale: string|null, prefix: string|null},
+     *         type:     array{enabled: bool|null, prefix: string|null},
+     *     },
+     * } $config
      */
     private function disableServices(
         array $config,
-        ContainerConfigurator $container,
+        ContainerConfigurator $containerConfigurator,
     ): void {
         $map = [
             'array'    => ArrayExtension::class,
@@ -78,9 +118,13 @@ class JmfTwigExtensionsBundle extends AbstractBundle
             'type'     => TypeExtension::class,
         ];
 
+        $rootEnabled = $config['enabled'];
+
         foreach ($map as $key => $class) {
-            if (!($config[$key]['enabled'] ?? true)) {
-                $container->services()->remove($class);
+            $enabled = $config['extensions'][$key]['enabled'] ?? $rootEnabled;
+
+            if (!$enabled) {
+                $containerConfigurator->services()->remove($class);
             }
         }
     }

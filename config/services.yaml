@@ -4,11 +4,6 @@ services:
         autoconfigure: true
         autowire:      true
 
-    Jmf\Sort\AssociativeSorter:
-    Jmf\Sort\ByKeySorter:
-    Jmf\Sort\ByPropertySorter:
-    Jmf\Sort\ByValueSorter:
-
     Jmf\Twig\Extension\Array\ArrayExtension:
         arguments:
             $functionPrefix: '%jmf_twig_extensions.array.prefix%'
@@ -21,8 +16,6 @@ services:
         arguments:
             $functionPrefix: '%jmf_twig_extensions.inline.prefix%'
             $basePath:       '%jmf_twig_extensions.inline.base_path%'
-
-    Jmf\Twig\Extension\Sort\PropertyPassParser:
 
     Jmf\Twig\Extension\Sort\SortExtension:
         arguments:

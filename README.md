@@ -53,53 +53,52 @@ Or create a `jmf_twig_extensions.yaml` file in the `config/package` directory as
 ```yaml
 jmf_twig_extensions:
 
-    # Twig "array" extension configuration.
-    array:
-        enabled:              true
+    # Enable or disable all Twig extensions. Can be overridden per extension.
+    enabled:              true
 
-        # Optional prefix before function and filter names.
-        prefix:               ''
+    # Optional prefix before function and filter names. Can be overridden per extension.
+    prefix:               ''
 
-    # Twig "currency" extension configuration.
-    currency:
-        enabled:              true
+    extensions:
 
-        # Optional prefix before function and filter names.
-        prefix:               ''
+        # Twig "array" extension configuration.
+        array:
+            # Override the root "enabled" setting. Omit to inherit from root.
+            enabled:          true
 
-    # Twig "inline" extension configuration.
-    inline:
+            # Override the root "prefix" setting. Omit to inherit from root.
+            prefix:           ''
 
-        # Base path to restrict file inlining. Also, all calls to the "inline" function will be relative to this path.
-        basePath:             '%kernel.project_dir%/templates'
-        enabled:              true
+        # Twig "currency" extension configuration.
+        currency:
+            enabled:          true
+            prefix:           ''
 
-        # Optional prefix before function and filter names.
-        prefix:               ''
+        # Twig "inline" extension configuration.
+        inline:
+            enabled:          true
+            prefix:           ''
 
-    # Twig "sort" extension configuration.
-    sort:
-        enabled:              true
+            # Base path to restrict file inlining. Also, all calls to the "inline" function will be relative to this path.
+            basePath:         '%kernel.project_dir%/templates'
 
-        # Optional prefix before function and filter names.
-        prefix:               ''
+        # Twig "sort" extension configuration.
+        sort:
+            enabled:          true
+            prefix:           ''
 
-    # Twig "time" extension configuration.
-    time:
-        enabled:              true
+        # Twig "time" extension configuration.
+        time:
+            enabled:          true
+            prefix:           ''
 
-        # Optional locale for date and time representation.
-        locale:               null
+            # Optional locale for date and time representation.
+            locale:           null
 
-        # Optional prefix before function and filter names.
-        prefix:               ''
-
-    # Twig "type" extension configuration.
-    type:
-        enabled:              true
-
-        # Optional prefix before function and filter names.
-        prefix:               ''
+        # Twig "type" extension configuration.
+        type:
+            enabled:          true
+            prefix:           ''
 ```
 You may then alter any parameter to fit your needs.
 
