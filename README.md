@@ -14,6 +14,8 @@ Collection of Twig extensions as a Symfony Bundle, which provides:
   - sort arrays by value, keeping associativity (`asort`, `arsort`)
   - sort arrays by key (`ksort`, `krsort`)
   - sort arrays by properties (`psort`)
+- spaceless operations:
+  - strip whitespace between HTML tags (`spaceless`)
 - time-related operations:
   - adds direct access to PHP microtime() function
   - adds direct access to PHP intl_format() function
@@ -87,6 +89,11 @@ jmf_twig_extensions:
             enabled:          true
             prefix:           ''
 
+        # Twig "spaceless" extension configuration.
+        spaceless:
+            enabled:          true
+            prefix:           ''
+
         # Twig "time" extension configuration.
         time:
             enabled:          true
@@ -119,6 +126,10 @@ See https://packagist.org/packages/jmf/twig-inline for documentation.
 ### Twig sort extension
 
 See https://packagist.org/packages/jmf/twig-sort for documentation.
+
+### Twig spaceless extension
+
+See https://packagist.org/packages/jmf/twig-spaceless for documentation.
 
 ### Twig time extension
 

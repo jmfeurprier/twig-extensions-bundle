@@ -9,6 +9,7 @@
         "jmf/twig-currency": "^1.0",
         "jmf/twig-inline": "^1.0",
         "jmf/twig-sort": "^1.2",
+        "jmf/twig-spaceless": "^1.0",
         "jmf/twig-time": "^1.0",
         "jmf/twig-type": "^1.0",
         "symfony/framework-bundle": "^7.0|^8.0"

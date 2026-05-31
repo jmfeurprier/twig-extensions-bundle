@@ -21,6 +21,10 @@ services:
         arguments:
             $functionPrefix: '%jmf_twig_extensions.sort.prefix%'
 
+    Jmf\Twig\Extension\Spaceless\SpacelessExtension:
+        arguments:
+            $functionPrefix: '%jmf_twig_extensions.spaceless.prefix%'
+
     Jmf\Twig\Extension\Time\TimeExtension:
         arguments:
             $functionPrefix: '%jmf_twig_extensions.time.prefix%'

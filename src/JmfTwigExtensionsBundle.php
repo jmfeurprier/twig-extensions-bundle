@@ -8,6 +8,7 @@ use Jmf\Twig\Extension\Array\ArrayExtension;
 use Jmf\Twig\Extension\Currency\CurrencyExtension;
 use Jmf\Twig\Extension\Inline\InlineExtension;
 use Jmf\Twig\Extension\Sort\SortExtension;
+use Jmf\Twig\Extension\Spaceless\SpacelessExtension;
 use Jmf\Twig\Extension\Time\TimeExtension;
 use Jmf\Twig\Extension\Type\TypeExtension;
 use Override;
@@ -31,12 +32,13 @@ class JmfTwigExtensionsBundle extends AbstractBundle
      *     enabled: bool,
      *     prefix: string,
      *     extensions: array{
-     *         array:    array{enabled: bool|null, prefix: string|null},
-     *         currency: array{enabled: bool|null, prefix: string|null},
-     *         inline:   array{basePath: string, enabled: bool|null, prefix: string|null},
-     *         sort:     array{enabled: bool|null, prefix: string|null},
-     *         time:     array{enabled: bool|null, locale: string|null, prefix: string|null},
-     *         type:     array{enabled: bool|null, prefix: string|null},
+     *         array:     array{enabled: bool|null, prefix: string|null},
+     *         currency:  array{enabled: bool|null, prefix: string|null},
+     *         inline:    array{basePath: string, enabled: bool|null, prefix: string|null},
+     *         sort:      array{enabled: bool|null, prefix: string|null},
+     *         spaceless: array{enabled: bool|null, prefix: string|null},
+     *         time:      array{enabled: bool|null, locale: string|null, prefix: string|null},
+     *         type:      array{enabled: bool|null, prefix: string|null},
      *     },
      * } $config
      */
@@ -57,12 +59,13 @@ class JmfTwigExtensionsBundle extends AbstractBundle
      *     enabled: bool,
      *     prefix: string,
      *     extensions: array{
-     *         array:    array{enabled: bool|null, prefix: string|null},
-     *         currency: array{enabled: bool|null, prefix: string|null},
-     *         inline:   array{basePath: string, enabled: bool|null, prefix: string|null},
-     *         sort:     array{enabled: bool|null, prefix: string|null},
-     *         time:     array{enabled: bool|null, locale: string|null, prefix: string|null},
-     *         type:     array{enabled: bool|null, prefix: string|null},
+     *         array:     array{enabled: bool|null, prefix: string|null},
+     *         currency:  array{enabled: bool|null, prefix: string|null},
+     *         inline:    array{basePath: string, enabled: bool|null, prefix: string|null},
+     *         sort:      array{enabled: bool|null, prefix: string|null},
+     *         spaceless: array{enabled: bool|null, prefix: string|null},
+     *         time:      array{enabled: bool|null, locale: string|null, prefix: string|null},
+     *         type:      array{enabled: bool|null, prefix: string|null},
      *     },
      * } $config
      */
@@ -78,6 +81,7 @@ class JmfTwigExtensionsBundle extends AbstractBundle
             'inline.base_path' => $config['extensions']['inline']['basePath'],
             'inline.prefix'    => $config['extensions']['inline']['prefix'] ?? $rootPrefix,
             'sort.prefix'      => $config['extensions']['sort']['prefix'] ?? $rootPrefix,
+            'spaceless.prefix' => $config['extensions']['spaceless']['prefix'] ?? $rootPrefix,
             'time.locale'      => $config['extensions']['time']['locale'],
             'time.prefix'      => $config['extensions']['time']['prefix'] ?? $rootPrefix,
             'type.prefix'      => $config['extensions']['type']['prefix'] ?? $rootPrefix,
@@ -96,12 +100,13 @@ class JmfTwigExtensionsBundle extends AbstractBundle
      *     enabled: bool,
      *     prefix: string,
      *     extensions: array{
-     *         array:    array{enabled: bool|null, prefix: string|null},
-     *         currency: array{enabled: bool|null, prefix: string|null},
-     *         inline:   array{enabled: bool|null, prefix: string|null, basePath: string},
-     *         sort:     array{enabled: bool|null, prefix: string|null},
-     *         time:     array{enabled: bool|null, locale: string|null, prefix: string|null},
-     *         type:     array{enabled: bool|null, prefix: string|null},
+     *         array:     array{enabled: bool|null, prefix: string|null},
+     *         currency:  array{enabled: bool|null, prefix: string|null},
+     *         inline:    array{enabled: bool|null, prefix: string|null, basePath: string},
+     *         sort:      array{enabled: bool|null, prefix: string|null},
+     *         spaceless: array{enabled: bool|null, prefix: string|null},
+     *         time:      array{enabled: bool|null, locale: string|null, prefix: string|null},
+     *         type:      array{enabled: bool|null, prefix: string|null},
      *     },
      * } $config
      */
@@ -110,12 +115,13 @@ class JmfTwigExtensionsBundle extends AbstractBundle
         ContainerConfigurator $containerConfigurator,
     ): void {
         $map = [
-            'array'    => ArrayExtension::class,
-            'currency' => CurrencyExtension::class,
-            'inline'   => InlineExtension::class,
-            'sort'     => SortExtension::class,
-            'time'     => TimeExtension::class,
-            'type'     => TypeExtension::class,
+            'array'     => ArrayExtension::class,
+            'currency'  => CurrencyExtension::class,
+            'inline'    => InlineExtension::class,
+            'sort'      => SortExtension::class,
+            'spaceless' => SpacelessExtension::class,
+            'time'      => TimeExtension::class,
+            'type'      => TypeExtension::class,
         ];
 
         $rootEnabled = $config['enabled'];
